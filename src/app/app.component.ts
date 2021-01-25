@@ -1,3 +1,5 @@
+// ch 22 1/25/2012   p557
+
 import { Component } from '@angular/core';
 
 @Component({

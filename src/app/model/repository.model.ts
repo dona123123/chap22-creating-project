@@ -17,5 +17,27 @@ export class Model{
     getProduct(id: number): Product{
         return this.products.find( p =>this.locator(p, id));
     }
+    saveProduct( product: Product){
+        if( product.id ==0 || product.id == null){
+            product.id = this.generateID();
+            this.products.push( product);
+        }else{
+            let index = this.products.findIndex( p => this.locator( p, product.id));
+            this.products.splice( index, 1, product);
+        }
+    }
+    deleteProduct(id: number){
+        let index = this.products.findIndex( p => this.locator( p, id));
+        if( index > -1){
+            this.products.splice( index, 1);
+        }
+    }
+    private generateID(): number{
+        let candidate = 100;
+        while ( this.getProduct( candidate) != null){
+            candidate ++;
+        }
+        return candidate;
+    }
 
 }
